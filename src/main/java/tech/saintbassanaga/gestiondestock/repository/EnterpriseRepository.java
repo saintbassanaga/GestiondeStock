@@ -1,4 +1,10 @@
 package tech.saintbassanaga.gestiondestock.repository;
 
-public interface EnterpriseRepository extends org.springframework.data.jpa.repository.JpaRepository<tech.saintbassanaga.gestiondestock.models.Enterprise, java.util.UUID> ,org.springframework.data.jpa.repository.JpaSpecificationExecutor<tech.saintbassanaga.gestiondestock.models.Enterprise> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import tech.saintbassanaga.gestiondestock.models.Enterprise;
+
+import java.util.UUID;
+
+public interface EnterpriseRepository extends JpaRepository<Enterprise, UUID>, JpaSpecificationExecutor<Enterprise> {
 }

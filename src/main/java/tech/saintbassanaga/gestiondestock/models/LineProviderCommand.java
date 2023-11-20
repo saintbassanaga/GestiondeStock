@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "LineProviderCommand")
+@Table(name = "line_Provider_Command")
 public class LineProviderCommand extends AbstractEntity {
 
     @Column(name = "quantity")
@@ -22,14 +22,14 @@ public class LineProviderCommand extends AbstractEntity {
     @Column(name = "unitprices")
     private BigDecimal unitPrices;
 
-    @Column(name = "enterpriseId")
+    @Column(name = "enterprise_Id")
     private Integer enterpriseId;
 
     @ManyToOne
-    @JoinColumn(name = "articleId")
+    @JoinColumn(name = "article_Id")
     private Article article;
 
     @ManyToOne
-    @JoinColumn(name = "commandProviderId")
+    @JoinColumn(name = "command_Provider_Id")
     private CommandProvider commandProvider;
 }

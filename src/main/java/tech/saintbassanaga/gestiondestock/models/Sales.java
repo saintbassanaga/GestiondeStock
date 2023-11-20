@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.Instant;
 import java.util.List;
 
 @Getter
@@ -13,12 +14,21 @@ import java.util.List;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "ventes")
-public class Ventes extends AbstractEntity{
-
+@Table(name = "sales")
+public class Sales extends AbstractEntity{
+    @Column(name = "code")
     private String code;
 
-    @OneToMany
-    @JoinColumn(name = "ligneVentes")
-    private List<LigneVente> ligneVentes;
+    @Column(name = "saleDate")
+    private Instant saleDate;
+
+    @Column(name = "enterpriseId")
+    private Integer enterpriseId;
+
+    @Column(name = "comments")
+    private String comments;
+
+    @OneToMany(mappedBy ="sale")
+    @ToString.Exclude
+    private List<SaleLine> saleLines;
 }

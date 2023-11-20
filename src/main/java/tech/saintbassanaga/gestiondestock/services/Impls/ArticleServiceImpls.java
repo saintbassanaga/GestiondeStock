@@ -8,7 +8,6 @@ import tech.saintbassanaga.gestiondestock.dtos.ArticleDto;
 import tech.saintbassanaga.gestiondestock.exceptions.EntityNotFoundException;
 import tech.saintbassanaga.gestiondestock.exceptions.ErrorCode;
 import tech.saintbassanaga.gestiondestock.exceptions.InvalidEntityException;
-import tech.saintbassanaga.gestiondestock.models.Article;
 import tech.saintbassanaga.gestiondestock.repository.ArticleRepository;
 import tech.saintbassanaga.gestiondestock.services.ArticleService;
 import tech.saintbassanaga.gestiondestock.validators.ArticleValidator;
@@ -21,19 +20,20 @@ import java.util.stream.Collectors;
 @Getter
 @Service("articleServiceImpl")
 @Slf4j
-public class ArticleServiceImpl implements ArticleService {
+public class ArticleServiceImpls implements ArticleService {
 
 
     private final ArticleRepository articleRepository;
 
-    public ArticleServiceImpl(ArticleRepository articleRepository) {
+    public ArticleServiceImpls(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
     /**
      *
-     * @param dto
-     * @return
+     * @param dto constructed Object
+     * @implSpec  Save Data in the Database
+     * @return Article Dto
      */
     @Override
     public ArticleDto save(ArticleDto dto) {
@@ -55,11 +55,10 @@ public class ArticleServiceImpl implements ArticleService {
             log.error("Article ID is null");
             return null;
         }
-        Article article = articleRepository.findById(Id).orElseThrow(
-                () -> new EntityNotFoundException(
-                        "There is no Article with Id =" + Id + "Founded in the Database",
+        return articleRepository.findById(Id)
+                .map(ArticleDto::fromEntity)
+                .orElseThrow(()-> new EntityNotFoundException( "There is no category with ID = " + Id + " found in DataBase",
                         ErrorCode.ARTICLE_NOT_FOUND));
-        return ArticleDto.fromEntity(article);
     }
 
 
@@ -69,10 +68,9 @@ public class ArticleServiceImpl implements ArticleService {
             log.error("Article code is null");
             return null;
         }
-
-        Article article = articleRepository.findArticleByCodeArticle(codeArticle).orElseThrow(
-                () -> new EntityNotFoundException("There is no article with code :" + codeArticle + "in the Database", ErrorCode.ARTICLE_NOT_FOUND));
-        return ArticleDto.fromEntity(article);
+        return articleRepository.findArticleByCodeArticle(codeArticle)
+                .map(ArticleDto::fromEntity)
+                .orElseThrow( () -> new EntityNotFoundException("There is no article with code :" + codeArticle + "in the Database", ErrorCode.ARTICLE_NOT_FOUND));
     }
 
     @Override

@@ -7,25 +7,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import tech.saintbassanaga.gestiondestock.dtos.ArticleDto;
 
-import java.awt.*;
 import java.util.List;
 import java.util.UUID;
-import static tech.saintbassanaga.gestiondestock.utils.Constants.APP_ROOT;
+public interface ArticleAPI {
 
-public interface articleController {
-
-    @PostMapping(value =APP_ROOT+ "/article/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value ="/create",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     ArticleDto save(ArticleDto dto);
 
-    @GetMapping(value = APP_ROOT+"/article/{articleID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value ="findBy/byID/{articleID}", produces = MediaType.APPLICATION_JSON_VALUE)
     ArticleDto findById(@PathVariable("articleID") UUID Id);
 
-    @GetMapping(value = APP_ROOT+"/article/{codeArticle}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value ="/find/byCode/{codeArticle}", produces = MediaType.APPLICATION_JSON_VALUE)
     ArticleDto findByCodeArticle(@PathVariable("codeArticle") String codeArticle);
 
-    @GetMapping(value = APP_ROOT+"/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value ="/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
     List<ArticleDto> findAll();
 
-    @DeleteMapping(APP_ROOT+"/article/delete/{Id}")
-    void delete(UUID Id);
+    @DeleteMapping("/delete/byId/{Id}")
+    void delete(@PathVariable("Id") UUID Id);
 }

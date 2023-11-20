@@ -1,4 +1,10 @@
 package tech.saintbassanaga.gestiondestock.repository;
 
-public interface ProviderRepository extends org.springframework.data.jpa.repository.JpaRepository<tech.saintbassanaga.gestiondestock.models.Provider, java.util.UUID> ,org.springframework.data.jpa.repository.JpaSpecificationExecutor<tech.saintbassanaga.gestiondestock.models.Provider> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import tech.saintbassanaga.gestiondestock.models.Provider;
+
+import java.util.UUID;
+
+public interface ProviderRepository extends JpaRepository<Provider, UUID>, JpaSpecificationExecutor<Provider> {
 }

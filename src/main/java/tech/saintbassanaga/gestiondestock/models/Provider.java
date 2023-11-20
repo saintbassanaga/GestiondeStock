@@ -14,13 +14,13 @@ import java.util.List;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "fournisseur")
-public class Fournisseur extends  AbstractEntity{
+@Table(name = "provider")
+public class Provider extends  AbstractEntity{
 
-    @Column(name = "name")
+    @Column(name = "firstname")
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "lastname")
     private String surname;
 
     @Column(name = "photo")
@@ -29,13 +29,17 @@ public class Fournisseur extends  AbstractEntity{
     @Embedded
     private Address address;
 
-    @Column(name = "mail")
-    private String mail;
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "numTel")
-    private  String numTel;
+    @Column(name = "phone_number")
+    private  String phoneNumber;
 
-    @OneToMany(mappedBy = "fournisseur")
-    private List<CommandFournisseur> commandFournisseur;
+    @Column(name = "enterpriseId")
+    private Integer EnterpriseId;
+
+    @OneToMany(mappedBy = "provider")
+    @ToString.Exclude
+    private List<CommandProvider> commandProviders;
 
 }
