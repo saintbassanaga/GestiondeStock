@@ -1,17 +1,38 @@
 package tech.saintbassanaga.gestiondestock.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
+import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "commandeClient")
-public class CommandeClient extends AbstractEntity{
+@Table(name = "commandClient")
+public class CommandClient extends AbstractEntity{
+
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "command_date")
+    private Instant commandDate;
+
+    @Column(name = "command_state")
+    @Enumerated(EnumType.STRING)
+    private CommandState commandState;
+
+    @Column(name = "enterpriseId")
+    private Integer EnterpriseId;
+
+    @OneToMany(mappedBy = "commandClient")
+    private List<LineClientCommand> lineClientCommands;
+
+
+    @ManyToOne
+    @JoinColumn(name = "idClient")
+    private Client client;
 }

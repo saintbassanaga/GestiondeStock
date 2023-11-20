@@ -1,10 +1,7 @@
 package tech.saintbassanaga.gestiondestock.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -17,12 +14,23 @@ import java.math.BigDecimal;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "ligneVente")
-public class LigneVente extends AbstractEntity {
+@Table(name = "saleLine")
+public class SaleLine extends AbstractEntity {
 
     @ManyToOne
-    @JoinColumn(name = "venteId")
-    private Ventes  ventes;
+    @JoinColumn(name = "saleId")
+    private Sales sale;
 
+    @Column(name = "quantity")
     private BigDecimal quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "articleId")
+    private Article article;
+
+    @Column(name = "unitprice")
+    private BigDecimal unitPrice;
+
+    @Column(name = "enterprise")
+    private Integer enterpriseId;
 }

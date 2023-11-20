@@ -1,4 +1,10 @@
 package tech.saintbassanaga.gestiondestock.repository;
 
-public interface LineProviderCommandRepository extends org.springframework.data.jpa.repository.JpaRepository<tech.saintbassanaga.gestiondestock.models.LineProviderCommand, java.util.UUID> ,org.springframework.data.jpa.repository.JpaSpecificationExecutor<tech.saintbassanaga.gestiondestock.models.LineProviderCommand> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import tech.saintbassanaga.gestiondestock.models.LineProviderCommand;
+
+import java.util.UUID;
+
+public interface LineProviderCommandRepository extends JpaRepository<LineProviderCommand, UUID>, JpaSpecificationExecutor<LineProviderCommand> {
 }

@@ -1,4 +1,10 @@
 package tech.saintbassanaga.gestiondestock.repository;
 
-public interface UsersRepository extends org.springframework.data.jpa.repository.JpaRepository<tech.saintbassanaga.gestiondestock.models.Users, java.util.UUID> ,org.springframework.data.jpa.repository.JpaSpecificationExecutor<tech.saintbassanaga.gestiondestock.models.Users> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import tech.saintbassanaga.gestiondestock.models.Users;
+
+import java.util.UUID;
+
+public interface UsersRepository extends JpaRepository<Users, UUID>, JpaSpecificationExecutor<Users> {
 }
